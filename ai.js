@@ -1,20 +1,25 @@
-let usedGuesses = [];
+let used = [];
 
-// SMART COM GUESS SYSTEM
+function generateCode() {
+    let digits = [];
+
+    while (digits.length < 4) {
+        let n = Math.floor(Math.random() * 10).toString();
+        if (!digits.includes(n)) digits.push(n);
+    }
+
+    return digits.join("");
+}
+
 function getAIGuess() {
 
     let guess;
 
     do {
         guess = generateCode();
-    } while (usedGuesses.includes(guess));
+    } while (used.includes(guess));
 
-    usedGuesses.push(guess);
+    used.push(guess);
 
     return guess;
-}
-
-// RESET AI MEMORY (called when game resets)
-function resetAI() {
-    usedGuesses = [];
 }
