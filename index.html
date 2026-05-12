@@ -1,1 +1,55 @@
-Hi
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HACKERS - Dead & Injured</title>
+
+    <!-- CSS FILE -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="gameContainer">
+
+        <h1>HACKERS</h1>
+        <p>Dead & Injured Battle System</p>
+
+        <!-- SETUP SECTION -->
+        <div id="setup">
+            <h3>Enter Your Secret Code</h3>
+            <input type="text" id="playerCode" maxlength="4">
+            <button onclick="startGame()">Start Game</button>
+        </div>
+
+        <!-- GAME SECTION -->
+        <div id="game" style="display:none;">
+
+            <h3 id="turnText">Player Turn</h3>
+
+            <input type="text" id="guessInput" maxlength="4">
+            <button onclick="playerGuess()">Guess</button>
+
+            <p id="result"></p>
+
+            <div class="board">
+                <h4>Player Board</h4>
+                <div id="playerBoard"></div>
+            </div>
+
+            <div class="board">
+                <h4>COM Board</h4>
+                <div id="comBoard"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- JS FILES -->
+    <script src="game.js"></script>
+    <script src="ai.js"></script>
+    <script src="score.js"></script>
+
+</body>
+</html>
