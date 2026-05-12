@@ -4,31 +4,33 @@
     <meta charset="UTF-8">
     <title>HACKERS - Dead & Injured</title>
 
-    <!-- CSS FILE -->
+    <!-- STYLE FILE -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div id="gameContainer">
+    <div class="container">
 
         <h1>HACKERS</h1>
-        <p>Dead & Injured Battle System</p>
+        <p>Dead & Injured Code Battle</p>
 
-        <!-- SETUP SECTION -->
-        <div id="setup">
+        <!-- SETUP SCREEN -->
+        <div id="setupScreen">
             <h3>Enter Your Secret Code</h3>
+            <p>4 digits (no repeats)</p>
+
             <input type="text" id="playerCode" maxlength="4">
             <button onclick="startGame()">Start Game</button>
         </div>
 
-        <!-- GAME SECTION -->
-        <div id="game" style="display:none;">
+        <!-- GAME SCREEN -->
+        <div id="gameScreen" style="display:none;">
 
             <h3 id="turnText">Player Turn</h3>
 
             <input type="text" id="guessInput" maxlength="4">
-            <button onclick="playerGuess()">Guess</button>
+            <button onclick="makeGuess()">Guess</button>
 
             <p id="result"></p>
 
@@ -44,9 +46,15 @@
 
         </div>
 
+        <!-- WIN SCREEN -->
+        <div id="winScreen" style="display:none;">
+            <h2 id="winText"></h2>
+            <button onclick="location.reload()">Play Again</button>
+        </div>
+
     </div>
 
-    <!-- JS FILES -->
+    <!-- SCRIPTS -->
     <script src="game.js"></script>
     <script src="ai.js"></script>
     <script src="score.js"></script>
