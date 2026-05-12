@@ -3,11 +3,12 @@ let comSecret = "";
 
 let turn = "player";
 
-let playerBoardText = "";
-let comBoardText = "";
+let playerBoard = "";
+let comBoard = "";
 
 // START GAME
 function startGame() {
+
     let code = document.getElementById("playerCode").value;
 
     if (code.length !== 4) {
@@ -18,14 +19,14 @@ function startGame() {
     playerSecret = code;
     comSecret = generateCode();
 
-    document.getElementById("setup").style.display = "none";
-    document.getElementById("game").style.display = "block";
+    document.getElementById("setupScreen").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
 
     document.getElementById("turnText").innerText = "Player Turn";
 }
 
 // PLAYER GUESS
-function playerGuess() {
+function makeGuess() {
 
     if (turn !== "player") return;
 
@@ -38,8 +39,9 @@ function playerGuess() {
 
     let result = checkGuess(guess, comSecret);
 
-    playerBoardText += guess + " → " + result.dead + "D " + result.injured + "I\n";
-    document.getElementById("playerBoard").innerText = playerBoardText;
+    playerBoard += guess + " → " + result.dead + "D " + result.injured + "I\n";
+
+    document.getElementById("playerBoard").innerText = playerBoard;
 
     document.getElementById("result").innerText =
         result.dead + " Dead, " + result.injured + " Injured";
@@ -52,18 +54,19 @@ function playerGuess() {
     turn = "com";
     document.getElementById("turnText").innerText = "COM Turn";
 
-    setTimeout(comGuess, 800);
+    setTimeout(comTurn, 800);
 }
 
 // COMPUTER TURN
-function comGuess() {
+function comTurn() {
 
-    let guess = generateCode(); // simple AI (upgrade later in ai.js)
+    let guess = generateCode();
 
     let result = checkGuess(guess, playerSecret);
 
-    comBoardText += guess + " → " + result.dead + "D " + result.injured + "I\n";
-    document.getElementById("comBoard").innerText = comBoardText;
+    comBoard += guess + " → " + result.dead + "D " + result.injured + "I\n";
+
+    document.getElementById("comBoard").innerText = comBoard;
 
     if (result.dead === 4) {
         endGame("COM WINS!");
@@ -76,6 +79,7 @@ function comGuess() {
 
 // CHECK DEAD & INJURED
 function checkGuess(guess, secret) {
+
     let dead = 0;
     let injured = 0;
 
@@ -90,11 +94,13 @@ function checkGuess(guess, secret) {
     return { dead, injured };
 }
 
-// GENERATE UNIQUE 4 DIGIT CODE
+// GENERATE UNIQUE 4-DIGIT CODE
 function generateCode() {
+
     let digits = [];
 
     while (digits.length < 4) {
+
         let n = Math.floor(Math.random() * 10).toString();
 
         if (!digits.includes(n)) {
@@ -108,31 +114,8 @@ function generateCode() {
 // END GAME
 function endGame(text) {
 
-    alert(text);
+    document.getElementById("gameScreen").style.display = "none";
+    document.getElementById("winScreen").style.display = "block";
 
-    // optional score system (safe check)
-    if (text.includes("PLAYER")) {
-        if (typeof addWin === "function") addWin();
-    }
-
-    resetGame();
-}
-
-// RESET GAME
-function resetGame() {
-
-    playerBoardText = "";
-    comBoardText = "";
-
-    playerSecret = "";
-    comSecret = "";
-
-    turn = "player";
-
-    document.getElementById("playerBoard").innerText = "";
-    document.getElementById("comBoard").innerText = "";
-    document.getElementById("result").innerText = "";
-
-    document.getElementById("setup").style.display = "block";
-    document.getElementById("game").style.display = "none";
+    document.getElementById("winText").innerText = text;
 }
